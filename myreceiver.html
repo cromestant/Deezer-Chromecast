@@ -13,21 +13,20 @@
 	$(function() {
 		console.log("Initializing.");
 		
-		var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', ['charz']),
+		var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', [cast.receiver.RemoteMedia.charz],"",5),
 			channelHandler = new cast.receiver.ChannelHandler('charz'),
-			console.log("Set channel handler");
 			$messages = $('.messages'),
 			$body = $('body');
 
 		channelHandler.addChannelFactory(
-			receiver.createChannelFactory('charz'));
+			receiver.createChannelFactory(cast.receiver.RemoteMedia.charz));
 
 		receiver.start();
 		console.log("aqui");
 		channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
 
 		function onMessage(event) {
-			console.log(event);
+			console.log(even);
 			$messages.html(event.message.type);
 		}
 	});
