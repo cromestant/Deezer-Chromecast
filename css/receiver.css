@@ -1,3 +1,6 @@
+body{
+	background:white;
+}
 .messages {
 	position: absolute;
 	margin-top: 50%;
