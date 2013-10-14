@@ -10,26 +10,34 @@
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
 <script>
-	$(function() {
-		console.log("Initializing.");
-		
-		var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', [cast.receiver.RemoteMedia.charz],"",5),
-			channelHandler = new cast.receiver.ChannelHandler('charz'),
-			$messages = $('.messages'),
-			$body = $('body');
-
-		channelHandler.addChannelFactory(
-			receiver.createChannelFactory(cast.receiver.RemoteMedia.charz));
-
-		receiver.start();
-		console.log("aqui");
-		channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
-
-		function onMessage(event) {
-			console.log(even);
-			$messages.html(event.message.type);
-		}
-	});
+	console.log("initializing");
+	$messages = $('.messages');
+	console.log("Set Var.");
+	var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', ['charz']);
+	var charzHandler = new cast.receiver.ChannelHandler('charz');
+	channelHandler.addChannelFactory(receiver.createChannelFactory('charz');
+	receiver.start();
+	channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE,onMessage);
+	
+	
+	function onMessage(event)
+	{
+		console.log(event);
+	}
+	
+	// var receiver = new cast.receiver.Receiver(
+	// 		    						'6d33b15b-5d59-40cd-8853-3011e2d2de42', ["charz"]);
+			// console.log("Created Receiver");
+			// 
+			// console.log("starting the channel factory");
+			// //	receiver.start();
+			// 
+			// //	channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage);
+			// 
+			// function onMessage(event) {
+			// 			console.log("Here onMessage:");
+			// 			console.log(event);
+			// 				$messages.html(event.message.type);
+			// 	}
 </script>
-
 </html>
