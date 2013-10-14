@@ -57,12 +57,25 @@
 			e.preventDefault();			
 			var $target = $(e.target),
 				receiver = _.find(receiverList, function(receiver) {
+					console.log("receiver is: "+ receiver.name);
+					console.log(receiver);
 					return receiver.id === $target.data('id');
 				});
 
 			doLaunch(receiver);
 		};
 
+		onMessageSent = function(msg)
+		{
+			if (msg=== null){
+				console.log("message was sent");
+				
+			}else{
+				console.log("Message was not sent");
+				
+			}
+		};
+		
 		doLaunch = function(receiver) {
 			if (!cv_activity) {
 				var request = new cast.LaunchRequest('6d33b15b-5d59-40cd-8853-3011e2d2de42', receiver);
@@ -74,10 +87,13 @@
 		};
 
 		onLaunch = function(activity) {
+			console.log("activity is:");
+			console.log(activity);
+			
 			if (activity.status === 'running') {
 				cv_activity = activity;
 
-				cast_api.sendMessage(cv_activity.activityId, 'charz', {type: 'HelloWorld'});
+				cast_api.sendMessage(cv_activity.activityId, 'charz', {type: 'HelloWorld'},onMessageSent);
 			}
 		};
 
