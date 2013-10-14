@@ -11,8 +11,11 @@
 <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
 <script>
 	$(function() {
+		console.log("Initializing.");
+		
 		var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', ['charz']),
 			channelHandler = new cast.receiver.ChannelHandler('charz'),
+			console.log("Set channel handler");
 			$messages = $('.messages'),
 			$body = $('body');
 
@@ -20,10 +23,11 @@
 			receiver.createChannelFactory('charz'));
 
 		receiver.start();
-console.log("aqui");
+		console.log("aqui");
 		channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
 
 		function onMessage(event) {
+			console.log(event);
 			$messages.html(event.message.type);
 		}
 	});
