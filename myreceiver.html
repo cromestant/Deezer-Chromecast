@@ -31,7 +31,7 @@
 	{
 		console.log("deezer Event received :");
 		console.log(event);
-		if(event.messages.type=="init"){
+		if(event.message.type=="init"){
 			// DZ.token = event.messages.accessToken;
 			// 		DZ.tokenExpire = event.messages.expire;
 			// 		DZ.user_id = event.messages.userID;
@@ -42,8 +42,8 @@
 					player : {
 						onload : onPlayerLoaded,
 						token : {
-							accessToken:event.messages.accessToken,
-							expire:event.messages.expire
+							accessToken:event.message.accessToken,
+							expire:event.message.expire
 						}
 					}
 				});
