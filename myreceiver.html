@@ -17,7 +17,7 @@
 	console.log("initializing");
 	$messages = $('.messages');
 	console.log("Set Var.");
-	var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', ['charz']);
+	var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', ['charz','charz-deezer']);
 	var charzHandler = new cast.receiver.ChannelHandler('charz');
 	charzHandler.addChannelFactory(receiver.createChannelFactory('charz'));
 	var deezerChannel = new cast.receiver.ChannelHandler('charz-deezer');
