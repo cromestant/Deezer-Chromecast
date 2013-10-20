@@ -12,7 +12,7 @@
 <script src="http://cdn-files.deezer.com/js/min/dz.js"></script>
 <script>
 	var deezer_app_id="124097";
-	
+	var deezer_channel_url ="http://test.tigocloud.net/chrome/channel.php";
 	
 	console.log("initializing");
 	$messages = $('.messages');
@@ -20,10 +20,39 @@
 	var receiver = new cast.receiver.Receiver('6d33b15b-5d59-40cd-8853-3011e2d2de42', ['charz']);
 	var charzHandler = new cast.receiver.ChannelHandler('charz');
 	charzHandler.addChannelFactory(receiver.createChannelFactory('charz'));
+	var deezerChannel = new cast.receiver.ChannelHandler('charz-deezer');
+	deezerChannel.addChannelFactory(receiver.createChannelFactory('charz-deezer'));
+	
 	receiver.start();
 	charzHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE,onMessage);
+	deezerChannel.addEventListener(cast.receiver.Channel.EventType.MESSAGE,deezerMessage);
 	
-	
+	function deezerMessage(event)
+	{
+		console.log("Event received :");
+		console.log(event);
+		if(event.messages.type=="init"){
+			// DZ.token = event.messages.accessToken;
+			// 		DZ.tokenExpire = event.messages.expire;
+			// 		DZ.user_id = event.messages.userID;
+			// 		DZ
+			DZ.init({
+					appId  : deezer_app_id,
+					channelUrl : deezer_channel_url,
+					player : {
+						onload : onPlayerLoaded,
+						token : {
+							accessToken:event.messages.accessToken,
+							expire:event.messages.expire
+						}
+					}
+				});
+		}
+	}
+	function onPlayerLoaded (){
+		console.log("Player loaded");
+		
+	}
 	function onMessage(event)
 	{
 		console.log("Event Received");
